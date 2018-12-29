@@ -1,0 +1,14 @@
+let mapping (s : string) = 
+    if s <> "" then s.Split ' ' |> Array.map int else Array.empty
+let mapping2 (i : int[]) =
+    Array.head i, Array.skip 1 i
+let readFile = System.IO.File.ReadAllLines "INPUT.TXT"
+let sizeOfPuzzle = readFile.[0].Split ' ' |> Array.map int 
+let numberOfElem = Array.fold (*) 1 sizeOfPuzzle
+let elemMap = new Map<int, int[]> (readFile.[1..numberOfElem] |> Array.map mapping |> Array.map mapping2)
+let t = readFile.[numberOfElem + 1..readFile.Length - 2] |> Array.map mapping
+let u = Array.last readFile |> int
+//sizeOfPuzzle |> printfn "%A"
+elemMap |> printfn "%A"
+//t |> printfn "%A"
+//u |> printfn "%A"
